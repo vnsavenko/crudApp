@@ -1,4 +1,4 @@
-package cervice;
+package service;
 
 public interface DeveloperService  {
 

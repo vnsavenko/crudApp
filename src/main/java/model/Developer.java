@@ -4,30 +4,34 @@ package model;
 import java.util.Set;
 
 public class Developer {
-    private int id;
-    private Skill skill;
+    private Long id;
+    private Set<Skill> skills;
     private Account account;
 
-    public Developer(int id, Skill skill, Account account) {
+    public Developer() {
+    }
+
+    public Developer(Long id, Set<Skill> skills, Account account) {
         this.id = id;
-        this.skill = skill;
+        this.skills = skills;
         this.account = account;
     }
 
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Skill getSkill() {
-        return skill;
+    public Set<Skill> getSkills() {
+        return skills;
     }
 
-    public void setSkill(Skill skill) {
-        this.skill = skill;
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
     }
 
     public Account getAccount() {
@@ -38,11 +42,12 @@ public class Developer {
         this.account = account;
     }
 
+
     @Override
     public String toString() {
         return "Developer{" +
                 "id=" + id +
-                ", skill=" + skill +
+                ", skills=" + skills +
                 ", account=" + account +
                 '}';
     }

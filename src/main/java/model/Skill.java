@@ -1,31 +1,39 @@
 package model;
 
 public class Skill {
+
+    private Long id;
+    private String name;
+
     public Skill() {
     }
 
-    public Skill(int skill_id, String skill_name) {
-        this.skill_id = skill_id;
-        this.skill_name = skill_name;
+    public Skill(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    private int skill_id;
-
-    public int getSkill_id() {
-        return skill_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setSkill_id(int skill_id) {
-        this.skill_id = skill_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getSkill_name() {
-        return skill_name;
+    public String getName() {
+        return name;
     }
 
-    public void setSkill_name(String skill_name) {
-        this.skill_name = skill_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    private String skill_name;
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

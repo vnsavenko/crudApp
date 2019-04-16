@@ -1,8 +1,9 @@
-package repository;
+package repository.io;
 
 import model.Account;
 import model.Developer;
 import model.Skill;
+import repository.DeveloperRepository;
 
 import java.util.Arrays;
 import java.util.List;

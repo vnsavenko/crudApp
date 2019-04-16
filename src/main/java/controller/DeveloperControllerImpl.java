@@ -16,7 +16,7 @@ public class DeveloperControllerImpl {
 
     public List<Developer> getAllDevelopers(){
 
-        return developerService.getAllDevelopers();
+        return null;
     }
 
 }

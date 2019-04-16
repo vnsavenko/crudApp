@@ -1,10 +1,11 @@
-package repository;
+package repository.io;
 
 import model.Account;
+import repository.AccountRepository;
 
 import java.util.List;
 
-public class JavaIOAccountRepositoryImpl implements AccountRepository{
+public class JavaIOAccountRepositoryImpl implements AccountRepository {
     public void save(Account account) {
 
     }

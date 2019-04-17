@@ -22,14 +22,14 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
     }
 
     private List<String> readToArrayList() {
-        String s;
+        String skillLine;
         List<String> list = new ArrayList<>();
         try(BufferedReader reader = getReader()) {
             while(reader.ready())
             {
-                s = reader.readLine(); //читаем строку
-                if (!s.equals("")) {
-                    list.add(s);  // добавляем непустую запись в arrayList
+                skillLine = reader.readLine(); //читаем строку
+                if (validateLine(skillLine)) {
+                    list.add(skillLine);  // добавляем непустую запись в arrayList
                 }
             }
 
@@ -41,20 +41,59 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         return list;
     }
 
+
+    private boolean validateId(String idString) {
+        try {
+            Long.parseLong(idString); // если из строки можно выделить число, то true
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    private boolean validateSkill(String skillName) {
+        return !skillName.equals("");
+    }
+
+    private boolean validateLine(String line) {
+
+        String[] words = line.split(",");
+        try{
+            return validateId(words[0])&&validateSkill(words[1]);}
+        catch (Exception e) {
+            return false;
+        }
+    }
+
     public void save(Skill skill) {
 
         try (BufferedWriter writer = getWriter(true))
         {
-            String s = skill.toString();
+            String skillLine = "" + skill.getId() + "," + skill.getName();
             writer.newLine();
-            writer.write(s);
+            writer.write(skillLine);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void update(Long id) {
+    public void update(Skill skill) {
 
+        Long skillId;
+        List<String> list = readToArrayList();//получили ArrayList из файла
+
+        try(BufferedWriter writer = getWriter(false)){
+            for (String str : list
+                 ) {
+                skillId = Long.parseLong(str.substring(0, str.indexOf(',')));// вытаскиваем из строки id
+                writer.newLine();
+                if (skillId == skill.getId()){
+                    writer.write(""+ skill.getId() + "," + skill.getName());
+                } else writer.write(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -85,17 +124,17 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
     public Skill getById(Long id){
         Skill skill = null;
-        String s;
+        String skillLine;
         Long skillId;
         String skillName;
 
         try(BufferedReader reader = getReader()){
 
             while (reader.ready()) {
-                s = reader.readLine();
-               if (!s.equals("")) {
-                    skillId = Long.parseLong(s.substring(0, s.indexOf(',')));
-                    skillName = s.substring(s.indexOf(',')+1);
+                skillLine = reader.readLine();
+               if (validateLine(skillLine)) {
+                    skillId = Long.parseLong(skillLine.substring(0, skillLine.indexOf(',')));
+                    skillName = skillLine.substring(skillLine.indexOf(',')+1);
                     if (id.equals(skillId)) {
                         skill = new Skill();
                         skill.setId(skillId);
@@ -104,7 +143,9 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
                }
             }
 
-            if (skill==null) System.out.println("Нет объекта с id = " + id);
+            if (skill==null) {
+                System.out.println("Нет объекта с id = " + id);
+            }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -115,7 +156,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
     public List<Skill> getAll() {
         List<Skill> skills = new ArrayList<>();
-        String s;
+        String skillLine;
         Long skillId;
         String skillName;
         Skill skill;
@@ -123,10 +164,10 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         try(BufferedReader reader = getReader()){
 
             while (reader.ready()) {
-                s = reader.readLine();
-                if (!s.equals("")) {
-                    skillId = Long.parseLong(s.substring(0, s.indexOf(',')));
-                    skillName = s.substring(s.indexOf(',')+1);
+                skillLine = reader.readLine();
+                if (validateLine(skillLine)) {
+                    skillId = Long.parseLong(skillLine.substring(0, skillLine.indexOf(',')));
+                    skillName = skillLine.substring(skillLine.indexOf(',')+1);
 
                     skill = new Skill();
                     skill.setId(skillId);

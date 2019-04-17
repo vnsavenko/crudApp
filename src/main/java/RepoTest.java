@@ -1,7 +1,8 @@
 import model.Skill;
+
 import repository.io.JavaIOSkillRepositoryImpl;
 
-import java.util.List;
+
 
 public class RepoTest {
     public static void main(String[] args) {
@@ -25,33 +26,26 @@ public class RepoTest {
        else {
            System.out.println("Нет такого скила");
        }
-// показать все скилы
-        List<Skill> skills = ioSkillRepository.getAll();
-        for (Skill s : skills) {
-            System.out.println(s.toString());
-        }
 
-        System.out.println();
+       printAll();
 
-
-        // удалить скилл с id = 2
-        ioSkillRepository.delete(2L);
-
-        // показать оставшиеся
-        skills = ioSkillRepository.getAll();
-        for (Skill s : skills) {
-            System.out.println(s.toString());
-        }
-
-        System.out.println();
         ioSkillRepository.delete(1L);
 
         // показать оставшиеся
-        skills = ioSkillRepository.getAll();
-        for (Skill s : skills) {
-            System.out.println(s.toString());
-        }
 
+        printAll();
+
+        Skill skillUpdate = new Skill(3L, "Python");
+
+        ioSkillRepository.update(skillUpdate);
+
+        printAll();
+
+    }
+
+    private static void printAll() {
+        System.out.println();
+        new JavaIOSkillRepositoryImpl().getAll().stream().forEach(skill -> System.out.println(skill));
     }
 
 }

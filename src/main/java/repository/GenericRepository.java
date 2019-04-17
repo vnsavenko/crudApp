@@ -6,7 +6,7 @@ public interface GenericRepository<T, ID>{
 
     void save(T t);
 
-    void update(ID id);
+    void update(T t);
 
     void delete(ID id);
 

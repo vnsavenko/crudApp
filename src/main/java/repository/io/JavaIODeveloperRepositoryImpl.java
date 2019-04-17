@@ -13,7 +13,7 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
     }
 
-    public void update(Long id) {
+    public void update(Developer developer) {
 
     }
 

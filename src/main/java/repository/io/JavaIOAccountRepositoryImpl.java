@@ -10,7 +10,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     }
 
-    public void update(Long id) {
+    public void update(Account account) {
 
     }
 

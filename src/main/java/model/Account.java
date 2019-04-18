@@ -36,8 +36,18 @@ public class Account {
         return status;
     }
 
-    public void setStatus(AccountStatus status) {
-        this.status = status;
+    public void setStatus(String status) {
+        switch (status){
+            case "ACTIVE":
+                this.status = AccountStatus.ACTIVE;
+            break;
+            case  "BANNED":
+                this.status = AccountStatus.BANNED;
+                break;
+            case "DELETED":
+                this.status = AccountStatus.DELETED;
+                break;
+        }
     }
 
     @Override

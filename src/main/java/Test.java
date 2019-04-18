@@ -1,3 +1,5 @@
+import model.Account;
+
 public class Test {
     public static void main(String[] args) {
         String testString = "123,l;l";
@@ -9,6 +11,19 @@ public class Test {
 
         System.out.println(valid);
 
+
+        boolean[] booleans = {true, true, true, true, true};
+
+        boolean multBoolean = true;
+
+        for (boolean b: booleans
+             ) {
+            multBoolean &= b;
+        }
+
+        System.out.println(multBoolean);
+
+        System.out.println(Account.class.getFields().length);
 
 
 
@@ -39,4 +54,5 @@ public class Test {
     static boolean validateSkill(String string){
         return !string.equals("");
     }
+
 }

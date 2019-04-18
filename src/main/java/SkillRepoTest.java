@@ -4,7 +4,7 @@ import repository.io.JavaIOSkillRepositoryImpl;
 
 
 
-public class RepoTest {
+public class SkillRepoTest {
     public static void main(String[] args) {
 
 

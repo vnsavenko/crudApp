@@ -1,6 +1,5 @@
 package repository.io;
 
-import controller.IOProvider;
 import model.Skill;
 import repository.SkillRepository;
 

@@ -1,4 +1,9 @@
+package repoTests;
+
 import model.Account;
+import model.Developer;
+
+import java.lang.reflect.Field;
 
 public class Test {
     public static void main(String[] args) {
@@ -28,7 +33,12 @@ public class Test {
 
 
 
-        //System.out.println(validateString(testString));
+       // System.out.println(Account.class.getDeclaredFields().length);
+
+        Field[] declaredFields = Account.class.getDeclaredFields();
+        for (int i = 0; i < declaredFields.length; i++) {
+            System.out.println("DeclaredFields:" + declaredFields[i].getName());
+        }
 
     }
 
@@ -54,5 +64,7 @@ public class Test {
     static boolean validateSkill(String string){
         return !string.equals("");
     }
+
+
 
 }

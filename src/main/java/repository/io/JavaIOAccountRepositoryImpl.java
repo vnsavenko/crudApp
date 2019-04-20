@@ -1,8 +1,7 @@
 package repository.io;
 
-import controller.IOProvider;
 import model.Account;
-import model.Skill;
+import myLib.RepoHelper;
 import repository.AccountRepository;
 
 import java.io.BufferedReader;
@@ -15,7 +14,7 @@ import java.util.List;
 public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     public static final String FILE_NAME = "accounts.txt";
-    private static final int NUMBER_OF_FIELDS_IN_ACCOUNT = 3;
+    private static final int NUMBER_OF_FIELDS_IN_ACCOUNT = Account.class.getDeclaredFields().length;
 
     private BufferedWriter getWriter(boolean append) throws IOException {
         return IOProvider.getWriter(FILE_NAME, append);
@@ -137,7 +136,9 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
         }
     }
 
-    public Account getById(Long id) {
+    public Account getById(Long id) { //Helper.getById<Account>(Long Id);
+
+
         Account account = null;
         String line;
         Long accountId;

@@ -1,3 +1,5 @@
+package repoTests;
+
 import model.Skill;
 
 import repository.io.JavaIOSkillRepositoryImpl;

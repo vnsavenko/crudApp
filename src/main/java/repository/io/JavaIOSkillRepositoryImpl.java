@@ -20,7 +20,8 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         return IOProvider.getReader(FILE_NAME);
     }
 
-    private List<String> readToArrayList() {
+
+        private List<String> readToArrayList() {
         String skillLine;
         List<String> list = new ArrayList<>();
         try(BufferedReader reader = getReader()) {
@@ -79,7 +80,8 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
     public void update(Skill skill) {
 
         Long skillId;
-        List<String> list = readToArrayList();//получили ArrayList из файла
+        boolean isUpdated = false;
+        List<String> list = readToArrayList();//получили ArrayList строк из файла
 
         try(BufferedWriter writer = getWriter(false)){
             for (String str : list
@@ -88,10 +90,17 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
                 writer.newLine();
                 if (skillId == skill.getId()){
                     writer.write(""+ skill.getId() + "," + skill.getName());
+                   isUpdated = true;
                 } else writer.write(str);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if (!isUpdated) {
+            System.out.println("Нет скилла с таким id: " + skill.getId());
+        } else {
+            System.out.println("Cкилл c id: " + skill.getId() + "обновлен");
         }
 
 

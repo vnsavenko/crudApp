@@ -1,5 +1,6 @@
-
-1,SQL
-2,JavaScript
-3,HTML
-4,PHP
+1,skill
+2,новый скилл
+5,FFFFFFFFFFFFFFFFFFF3
+6,1111121313
+7,ssssssssss
+8,dddddd

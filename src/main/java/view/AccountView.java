@@ -1,8 +1,8 @@
-package controller;
+package view;
 
 import model.Skill;
 import repository.io.IOProvider;
-import repository.io.JavaIOSkillRepositoryImpl;
+import repository.io.JavaIOAccountRepositoryImpl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,13 +13,67 @@ import java.util.regex.Pattern;
 
 import static repository.io.JavaIOSkillRepositoryImpl.FILE_NAME;
 
-public class SkillController {
+public class AccountView {
 
-    private JavaIOSkillRepositoryImpl skillRepository;
+    public static final String MENU_SKILLS = "*** В главном меню скилов ***" +
+            "\n1. Добавить skill;" +
+            "\n2. Получить скилл" +
+            "\n3. Редактировать скилл" +
+            "\n4. Удалить скилл" +
+            "\n5. Вывести список скилов" +
+            "\n0. Выйти из меню";
 
-    public SkillController() {
-        skillRepository = new JavaIOSkillRepositoryImpl();
+
+
+    private BufferedReader consoleReader;
+
+    private JavaIOAccountRepositoryImpl accountRepository;
+
+    public AccountView() {
+        consoleReader = new BufferedReader(new InputStreamReader(System.in));
+        accountRepository = new JavaIOAccountRepositoryImpl();
     }
+
+    public void processAccountFromConsole() throws IOException {
+        while (true) {
+            String messageFromConsole = consoleReader.readLine();
+            boolean isValid = validateId(messageFromConsole);
+            if (isValid) {
+                int menuItem = Integer.parseInt(messageFromConsole);
+                switch (menuItem) {
+                    case 1:
+                        addAccount();
+                        break;
+                    case 2:
+                        readAccount();
+                        break;
+                    case 3:
+                        updateAccount();
+                        break;
+                    case 4:
+                        deleteAccount();
+                        break;
+                    case 5:
+                        readAllAccounts();
+                        break;
+                    case 0:
+                        consoleReader.close();
+                        System.exit(0);
+
+                    default:
+                        System.out.println("Введено неверное число (0 - 5), попробуйте еще.");
+                }
+            } else System.out.println("Введено не число, попробуйте еще.");
+
+        }
+    }
+
+    private boolean validateId(String message) {
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher m = pattern.matcher(message);
+        return m.matches();
+    }
+
 
     private boolean validateLine(String line) {
         String[] words = line.split(" ");
@@ -54,13 +108,7 @@ public class SkillController {
         return (max + 1);
     }
 
-    public boolean validateId(String message) {
-        Pattern pattern = Pattern.compile("^\\d+$");
-        Matcher m = pattern.matcher(message);
-        return m.matches();
-    }
-
-    public void addSkill(BufferedReader consoleReader, String menu) throws IOException {
+    private void addAccount() throws IOException {
 
         while (true) {
             System.out.println("Введите наименование скила, 0 - выход в меню скилов");
@@ -68,23 +116,23 @@ public class SkillController {
             String skillName = consoleReader.readLine();
 
             if (skillName.equals("0")) {
-                System.out.println(menu);
+                System.out.println(MENU_SKILLS);
                 return;
             }
             Long id = getNextId();
-            skillRepository.save(new Skill(id, skillName));
+            accountRepository.save(new Skill(id, skillName));
             System.out.println("Скилл " + skillName + " добавлен в хранилище");
 
         }
     }
 
-    public void readSkill(BufferedReader consoleReader, String menu) throws IOException {
+    private void readAccount() throws IOException {
         while (true) {
             System.out.println("Введите id скила, 0 - выход в меню скилов");
             String skillId = consoleReader.readLine();
 
             if (skillId.equals("0")){
-                System.out.println(menu);
+                System.out.println(MENU_SKILLS);
                 return;
             }
 
@@ -99,13 +147,13 @@ public class SkillController {
         }
     }
 
-    public void updateSkill(BufferedReader consoleReader, String menu) throws IOException {
+    private void updateAccount() throws IOException {
         while (true) {
             System.out.println("Введите через пробел: id новое_имя_скилла . 0 - выход в меню скилов");
             String line = consoleReader.readLine();
 
             if (line.equals("0")){
-                System.out.println(menu);
+                System.out.println(MENU_SKILLS);
                 return;
             }
 
@@ -121,13 +169,13 @@ public class SkillController {
         }
     }
 
-    public void deleteSkill(BufferedReader consoleReader, String menu) throws IOException {
+    private void deleteAccount() throws IOException {
         while (true) {
             System.out.println("Введите id скила, 0 - выход в меню скилов");
             String skillId = consoleReader.readLine();
 
             if (skillId.equals("0")){
-                System.out.println(menu);
+                System.out.println(MENU_SKILLS);
 
                 return;
             }
@@ -144,8 +192,9 @@ public class SkillController {
         }
     }
 
-    public void readAllSkills() {
+    private void readAllAccounts() {
         System.out.println("skill_id  skill_name");
         skillRepository.getAll().stream().forEach(skill -> System.out.println(skill.getId() + " " + skill.getName()));
     }
+
 }

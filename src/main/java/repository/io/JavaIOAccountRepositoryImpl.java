@@ -1,7 +1,6 @@
 package repository.io;
 
 import model.Account;
-import myLib.RepoHelper;
 import repository.AccountRepository;
 
 import java.io.BufferedReader;
@@ -166,7 +165,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
             }
 
             if (account==null) {
-                System.out.println("Нет объекта с id = " + id);
+                System.out.println("Нет аккаунта с id = " + id);
             }
         }catch (FileNotFoundException e) {
             e.printStackTrace();

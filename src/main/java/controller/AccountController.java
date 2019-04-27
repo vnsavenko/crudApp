@@ -115,7 +115,7 @@ public class AccountController {
         return status;
     }
 
-    public void addAccount(BufferedReader consoleReader, String menu) throws IOException {
+    public void save(BufferedReader consoleReader, String menu) throws IOException {
 
         while (true) {
             System.out.println("Введите через запятую данные аккаунта, статус аккаунта (1 - ACTIVE, 2 - BANNED, 3 - DELETED)" +
@@ -146,9 +146,7 @@ public class AccountController {
         }
     }
 
-
-
-    public void readAccount(BufferedReader consoleReader, String menu) throws IOException {
+    public void getById(BufferedReader consoleReader, String menu) throws IOException {
         while (true) {
             System.out.println("Введите id аккаунта, 0 - выход в меню аккаунтов");
             String consoleInput = consoleReader.readLine();
@@ -170,7 +168,7 @@ public class AccountController {
         }
     }
 
-    public void updateAccount(BufferedReader consoleReader, String menu) throws IOException {
+    public void update(BufferedReader consoleReader, String menu) throws IOException {
         while (true) {
             System.out.println("Введите через запятую: id,новые_данные,статус_аккаунта(1 - ACTIVE, 2 - BANNED, 3 - DELETED)" +
                     "\n0 - выход в меню аккаунта");
@@ -200,7 +198,7 @@ public class AccountController {
         }
     }
 
-    public void deleteAccount(BufferedReader consoleReader, String menu) throws IOException {
+    public void delete(BufferedReader consoleReader, String menu) throws IOException {
         while (true) {
             System.out.println("Введите id аккаунта, 0 - выход в меню скилов");
             String id = consoleReader.readLine();
@@ -223,7 +221,7 @@ public class AccountController {
         }
     }
 
-    public void readAllAccounts() {
+    public void getAll() {
         System.out.println("account_id  accont_data account_status");
         accountRepository.getAll().stream().forEach(account -> System.out.println(account.getId() + " " +
                 account.getAccountData() + " " + account.getStatus().name()));

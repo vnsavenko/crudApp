@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
-    private static final String FILE_NAME = "developers.txt";
+    public static final String FILE_NAME = "developers.txt";
     private static final int NUMBER_OF_FIELDS_IN_DEVELOPER = Developer.class.getDeclaredFields().length;
 
     private BufferedWriter getWriter(boolean append) throws IOException {

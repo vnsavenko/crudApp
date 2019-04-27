@@ -1,2 +1,9 @@
 
 1,VALDEMAR,Savenko,JavaDeveloper,{2:},1
+2,ivan,ivanov,ja,{1:},1
+5,Питр,пит,пен,{1:2:},1
+6,hhhhhh,hhhhhhhh,hhhhhh,{5:},3
+7,gggg,hhh,bbb,{1:},2
+8,hh,h,h,{1:2:},3
+9,v,v,v,{1:2:},1
+10,sss,s,s,{1:},3

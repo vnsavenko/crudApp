@@ -60,7 +60,7 @@ public class SkillController {
         return m.matches();
     }
 
-    public void addSkill(BufferedReader consoleReader, String menu) throws IOException {
+    public void save(BufferedReader consoleReader, String menu) throws IOException {
 
         while (true) {
             System.out.println("Введите наименование скила, 0 - выход в меню скилов");
@@ -78,7 +78,7 @@ public class SkillController {
         }
     }
 
-    public void readSkill(BufferedReader consoleReader, String menu) throws IOException {
+    public void getById(BufferedReader consoleReader, String menu) throws IOException {
         while (true) {
             System.out.println("Введите id скила, 0 - выход в меню скилов");
             String skillId = consoleReader.readLine();
@@ -99,7 +99,7 @@ public class SkillController {
         }
     }
 
-    public void updateSkill(BufferedReader consoleReader, String menu) throws IOException {
+    public void update(BufferedReader consoleReader, String menu) throws IOException {
         while (true) {
             System.out.println("Введите через пробел: id новое_имя_скилла . 0 - выход в меню скилов");
             String line = consoleReader.readLine();
@@ -121,7 +121,7 @@ public class SkillController {
         }
     }
 
-    public void deleteSkill(BufferedReader consoleReader, String menu) throws IOException {
+    public void delete(BufferedReader consoleReader, String menu) throws IOException {
         while (true) {
             System.out.println("Введите id скила, 0 - выход в меню скилов");
             String skillId = consoleReader.readLine();
@@ -144,7 +144,7 @@ public class SkillController {
         }
     }
 
-    public void readAllSkills() {
+    public void getAll() {
         System.out.println("skill_id  skill_name");
         skillRepository.getAll().stream().forEach(skill -> System.out.println(skill.getId() + " " + skill.getName()));
     }

@@ -1,4 +1,0 @@
-
-1,DDDDDDDDDDDDDD,BANNED
-2,bbbbbbbbbbb,BANNED
-3,ccccccccccc,DELETED
